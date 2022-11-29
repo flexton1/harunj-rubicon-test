@@ -1,4 +1,6 @@
-<app-search-bar [mode]="'movies'"></app-search-bar>
+
+
+<app-search-bar (isLoading)="loadingChange($event)" [mode]="'movies'"></app-search-bar>
 
 
 
@@ -21,3 +23,5 @@
 </ng-container>
 
 </div>
+
+<!-- <loading *ngIf="isLoading"></loading> -->

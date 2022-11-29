@@ -12,11 +12,16 @@ export class MoviesComponent implements OnInit, OnDestroy {
   constructor(private moviesService: MoviesService){}
 
   movies?: Observable<any[]>;
+  isLoading: boolean = false;
 
   ngOnInit():void{
     this.movies = this.moviesService.movies$;
   }
 
+
+  loadingChange(event: any){
+    this.isLoading = event;
+  }
 
 
   ngOnDestroy(): void {

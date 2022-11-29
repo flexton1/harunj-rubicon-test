@@ -1,5 +1,5 @@
 import { ReturnStatement } from '@angular/compiler';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil, skip, debounceTime, Subject } from 'rxjs';
@@ -14,6 +14,7 @@ import { SeriesService } from 'src/app/services/series.service';
 export class SearchBarComponent implements OnInit, OnDestroy {
 
   @Input() mode!: 'series' | 'movies';
+  @Output() isLoading: EventEmitter<boolean> = new EventEmitter<boolean>;
 
   searchInputControl: FormControl = new FormControl();
 
@@ -45,19 +46,22 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.moviesService.getPopularMovies()
         .pipe(takeUntil(this._unsubscribeAll))
         .subscribe();
+        this.moviesService.setSearchQuery('');
       }else{
         this.seriesService.getPopularSeries()
         .pipe(takeUntil(this._unsubscribeAll))
         .subscribe();
+        this.seriesService.setSearchQuery('');
       }
         return;
       }
       if(this.mode === 'movies'){
+        this.isLoading.emit(true);
         this.moviesService.setSearchQuery(query);
         this.moviesService.searchMovies(query)
         .pipe(takeUntil(this._unsubscribeAll))
         .subscribe(() => {
-
+          this.isLoading.emit(false);
         })
       }else{
         this.seriesService.setSearchQuery(query);
