@@ -1,0 +1,23 @@
+<app-search-bar [mode]="'series'"></app-search-bar>
+
+
+<h3 style="margin-left: 20px;">Tv series</h3>
+
+
+<div class="grid">
+
+    <ng-container *ngIf="(series | async) as series">
+    <ng-container *ngFor="let serie of series; let i = index">
+    
+        <div [routerLink]="'/tv-series/' + serie.id" class="card">
+        <img src="{{'https://image.tmdb.org/t/p/original' + serie.poster_path}}" alt="Avatar" style="width:100%">
+        <div class="container">
+          <h4><b>{{i + 1}}.{{serie.name}}</b></h4> 
+          <p>{{serie.release_data}}</p> 
+        </div>
+      </div>
+    
+    </ng-container>
+    </ng-container>
+    
+    </div>

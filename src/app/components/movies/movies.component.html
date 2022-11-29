@@ -1,0 +1,23 @@
+<app-search-bar [mode]="'movies'"></app-search-bar>
+
+
+
+<h3 style="margin-left: 20px;">Movies</h3>
+
+<div class="grid">
+
+<ng-container *ngIf="(movies | async) as movies">
+<ng-container *ngFor="let movie of movies; let i = index">
+
+    <div [routerLink]="'/movies/' + movie.id" class="card">
+    <img src="{{'https://image.tmdb.org/t/p/original' + movie.poster_path}}" alt="Avatar" style="width:100%">
+    <div class="container">
+      <h4><b>{{i + 1}}.{{movie.title}}</b></h4> 
+      <p>{{movie.release_data}}</p> 
+    </div>
+  </div>
+
+</ng-container>
+</ng-container>
+
+</div>
