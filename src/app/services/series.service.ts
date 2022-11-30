@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, tap } from "rxjs";
   })
   export class SeriesService {
 
-    tokenPath = `url`;
+    tokenPath: string = `url`;
 
     token: string = 
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NjE2M2Y3ZjVhYmRmNWU3NWM3YmNmOWNkNDg5N2IyNSIsInN1YiI6IjYzODYwMzAxNWVkOGU5MDA4NmFjNzY3ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PpeDubf2PEW3vyjduUn-rrCdhHC_-8NnrP3dFdzdiQI';
@@ -58,8 +58,8 @@ import { BehaviorSubject, Observable, tap } from "rxjs";
       }
 
       searchSeries(query: string): Observable<any>{
-        let split_query = query.split(" ");
-        let searchString = "";
+        let split_query: string[] = query.split(" ");
+        let searchString: string = "";
         for(let i = 0; i<split_query.length; i++){
             searchString = searchString + (i === 0 ? split_query[i] : '+' + split_query[i]);
         }

@@ -24,7 +24,7 @@ export class MoviesDetailsComponent implements OnInit {
     })
   }
 
-  goBack(){
+  goBack(): void{
     this.location.back();
   }
 

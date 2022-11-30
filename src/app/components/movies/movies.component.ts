@@ -19,7 +19,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
 
-  loadingChange(event: any){
+  loadingChange(event: boolean): void{
     this.isLoading = event;
   }
 

@@ -29,7 +29,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.router.events
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(()=> {
+    .subscribe(() : void => {
       this.loadSearchString();
     })
 
@@ -39,7 +39,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       skip(2),
       debounceTime(300)
     )
-    .subscribe((query) => {
+    .subscribe((query: string): void => {
       if(!query || query.length < 3) {
         
         if(this.mode === 'movies'){
@@ -60,14 +60,14 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.moviesService.setSearchQuery(query);
         this.moviesService.searchMovies(query)
         .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(() => {
+        .subscribe((): void => {
           this.isLoading.emit(false);
         })
       }else{
         this.seriesService.setSearchQuery(query);
         this.seriesService.searchSeries(query)
         .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(() => {
+        .subscribe((): void => {
 
         })
       }
@@ -82,7 +82,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         if(this.moviesService.getSearchQuery() != ''){
           this.moviesService.searchMovies(this.moviesService.getSearchQuery())
           .pipe(takeUntil(this._unsubscribeAll))
-          .subscribe(() => {
+          .subscribe((): void => {
             this.searchInputControl.patchValue(this.moviesService.getSearchQuery())
           })
       }
@@ -90,7 +90,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       if(this.seriesService.getSearchQuery() != ''){
         this.seriesService.searchSeries(this.seriesService.getSearchQuery())
         .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(()=>{
+        .subscribe((): void =>{
           this.searchInputControl.patchValue(this.seriesService.getSearchQuery())
         })
     }

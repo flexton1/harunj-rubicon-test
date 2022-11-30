@@ -24,7 +24,7 @@ serie: any;
     })
   }
 
-  goBack(){
+  goBack(): void{
     this.location.back();
   }
 
